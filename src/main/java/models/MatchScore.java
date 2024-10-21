@@ -5,12 +5,8 @@ import lombok.Setter;
 
 @Getter @Setter
 public class MatchScore {
-    private int firstPlayerPoints;
-    private int secondPlayerPoints;
 
-    private int firstPlayerGames;
-    private int secondPlayerGames;
+    private PlayerScore firstPlayerScore = new PlayerScore();
 
-    private int firstPlayerSets;
-    private int secondPlayerSets;
+    private PlayerScore secondPlayerScore = new PlayerScore();
 }

@@ -1,6 +1,6 @@
 package dao;
 
-import entities.Match;
+import models.entities.Match;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 

@@ -1,4 +1,4 @@
-package entities;
+package models.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -10,6 +10,7 @@ import models.MatchScore;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor
 public class Match {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

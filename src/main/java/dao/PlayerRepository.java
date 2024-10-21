@@ -1,6 +1,6 @@
 package dao;
 
-import entities.Player;
+import models.entities.Player;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 

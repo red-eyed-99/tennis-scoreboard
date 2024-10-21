@@ -26,7 +26,7 @@ public class PlayerNameValidator {
         }
 
         if (!specialCharsPlacedCorrectly(playerName)) {
-            throw new PlayerNameValidationException("There must be a letter after special characters");
+            throw new PlayerNameValidationException("There must be a letter after space or a special character");
         }
     }
 

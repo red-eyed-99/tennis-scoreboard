@@ -17,7 +17,7 @@
         <property name="format_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">create</property>
 
-        <mapping class="entities.Player"/>
-        <mapping class="entities.Match"/>
+        <mapping class="models.entities.Player"/>
+        <mapping class="models.entities.Match"/>
     </session-factory>
 </hibernate-configuration>

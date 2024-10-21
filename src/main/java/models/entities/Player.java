@@ -1,4 +1,4 @@
-package entities;
+package models.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -10,6 +10,7 @@ import org.hibernate.annotations.NaturalId;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor
 public class Player {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

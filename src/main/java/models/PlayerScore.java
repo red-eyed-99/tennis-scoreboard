@@ -1,5 +1,6 @@
 package models;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,4 +12,13 @@ public class PlayerScore {
     private int playerGames;
 
     private int playerSets;
+
+    private int tiebreakPoints;
+
+    @Getter(AccessLevel.NONE)
+    private boolean advantage;
+
+    public boolean hasAdvantage() {
+        return advantage;
+    }
 }

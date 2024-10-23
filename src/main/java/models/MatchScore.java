@@ -6,7 +6,9 @@ import lombok.Setter;
 @Getter @Setter
 public class MatchScore {
 
-    private PlayerScore firstPlayerScore = new PlayerScore();
+    private final PlayerScore firstPlayerScore = new PlayerScore();
 
-    private PlayerScore secondPlayerScore = new PlayerScore();
+    private final PlayerScore secondPlayerScore = new PlayerScore();
+
+    private CalculationOption calculationOption = CalculationOption.ALL;
 }

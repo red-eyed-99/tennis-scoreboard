@@ -31,9 +31,9 @@
         </tr>
         </tbody>
     </table>
-    <form>
-        <button type="submit">First player wins a point</button>
-        <button type="submit">Second player wins a point</button>
+    <form method="post">
+        <button type="submit" name="point" value="1">First player wins a point</button>
+        <button type="submit" name="point" value="2">Second player wins a point</button>
     </form>
 </div>
 </body>

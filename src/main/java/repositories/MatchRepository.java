@@ -1,4 +1,4 @@
-package dao;
+package repositories;
 
 import models.entities.Match;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +11,7 @@ public class MatchRepository implements Repository<Match> {
 
     private final Session session;
 
-    public void save(Match match) {
+    public void persist(Match match) {
         session.persist(match);
     }
 

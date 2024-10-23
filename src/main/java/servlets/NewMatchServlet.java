@@ -79,12 +79,12 @@ public class NewMatchServlet extends HttpServlet {
 
         if (firstPlayer.isEmpty()) {
             firstPlayer = Optional.of(new Player(firstPlayerName));
-            playerService.save(firstPlayer.get());
+            playerService.persist(firstPlayer.get());
         }
 
         if (secondPlayer.isEmpty()) {
             secondPlayer = Optional.of(new Player(secondPlayerName));
-            playerService.save(secondPlayer.get());
+            playerService.persist(secondPlayer.get());
         }
 
         return new Player[]{firstPlayer.get(), secondPlayer.get()};

@@ -1,4 +1,4 @@
-package dao;
+package repositories;
 
 import models.entities.Player;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +11,7 @@ public class PlayerRepository implements Repository<Player> {
 
     private final Session session;
 
-    public void save(Player player) {
+    public void persist(Player player) {
         session.persist(player);
     }
 

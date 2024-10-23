@@ -1,6 +1,6 @@
 package services;
 
-import dao.PlayerRepository;
+import repositories.PlayerRepository;
 import models.entities.Player;
 import org.hibernate.Session;
 
@@ -17,10 +17,10 @@ public class PlayerService {
         playerRepository = new PlayerRepository(session);
     }
 
-    public void save(Player player) {
+    public void persist(Player player) {
         session.beginTransaction();
 
-        playerRepository.save(player);
+        playerRepository.persist(player);
 
         session.getTransaction().commit();
     }

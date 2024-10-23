@@ -17,4 +17,8 @@ public class OngoingMatchesService {
     public static void addNewMatch(UUID uuid, Match match) {
         ongoingMatches.put(uuid, match);
     }
+
+    public static void removeFinishedMatch(UUID uuid) {
+        ongoingMatches.remove(uuid);
+    }
 }

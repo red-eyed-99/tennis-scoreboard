@@ -11,9 +11,12 @@
         <thead>
         <tr>
             <th>Player</th>
-            <th>Sets</th>
-            <th>Games</th>
             <th>Points</th>
+            <th>Games</th>
+            <th>Sets</th>
+            <c:if test="${tiebreak == true}">
+                <th>TB Points</th>
+            </c:if>
         </tr>
         </thead>
         <tbody>
@@ -22,12 +25,18 @@
             <td>${firstPlayerScore.getPlayerPoints()}</td>
             <td>${firstPlayerScore.getPlayerGames()}</td>
             <td>${firstPlayerScore.getPlayerSets()}</td>
+            <c:if test="${tiebreak == true}">
+                <td>${firstPlayerScore.getTiebreakPoints()}</td>
+            </c:if>
         </tr>
         <tr>
             <td>${secondPlayerName}</td>
             <td>${secondPlayerScore.getPlayerPoints()}</td>
             <td>${secondPlayerScore.getPlayerGames()}</td>
             <td>${secondPlayerScore.getPlayerSets()}</td>
+            <c:if test="${tiebreak == true}">
+                <td>${secondPlayerScore.getTiebreakPoints()}</td>
+            </c:if>
         </tr>
         </tbody>
     </table>

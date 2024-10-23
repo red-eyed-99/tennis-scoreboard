@@ -47,8 +47,6 @@ public class MatchScoreCalculationService {
             updateScoreOnDeuce();
         } else if (calculationOption == CalculationOption.ADVANTAGE) {
             updateScoreOnAdvantage();
-        } else {
-            updateScoreOnTiebreak();
         }
     }
 
@@ -96,7 +94,7 @@ public class MatchScoreCalculationService {
         matchScore.setCalculationOption(CalculationOption.ADVANTAGE);
     }
 
-    public void updateScoreOnAdvantage() {
+    private void updateScoreOnAdvantage() {
         if (wonPointPlayerScore.hasAdvantage()) {
             increaseScoreGames();
             resetScorePoints();

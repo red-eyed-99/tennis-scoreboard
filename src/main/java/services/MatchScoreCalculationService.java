@@ -47,8 +47,6 @@ public class MatchScoreCalculationService {
             updateScoreOnDeuce();
         } else if (calculationOption == CalculationOption.ADVANTAGE) {
             updateScoreOnAdvantage();
-        } else {
-            updateScoreOnTiebreak();
         }
     }
 

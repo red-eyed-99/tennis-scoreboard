@@ -15,7 +15,7 @@ public class MatchScoreCalculationService {
     private final PlayerScore firstPlayerScore;
     private final PlayerScore secondPlayerScore;
 
-    public MatchScoreCalculationService(MatchScore matchScore, int wonPointPlayerNumber) {
+    public MatchScoreCalculationService(MatchScore matchScore, PlayerScore wonPointPlayerScore) {
         this.matchScore = matchScore;
 
         calculationMethod = matchScore.getCalculationMethod();

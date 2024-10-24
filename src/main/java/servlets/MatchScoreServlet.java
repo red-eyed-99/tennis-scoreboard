@@ -6,9 +6,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.Cleanup;
-import models.CalculationOption;
 import models.CalculationMethod;
 import models.MatchScore;
+import models.PlayerScore;
 import models.entities.Match;
 import services.FinishedMatchesPersistenceService;
 import services.MatchScoreCalculationService;
@@ -50,7 +50,9 @@ public class MatchScoreServlet extends HttpServlet {
 
         var matchScore = match.getMatchScore();
 
-        var calculationService = new MatchScoreCalculationService(matchScore, wonPointPlayerNumber);
+        var wonPointPlayerScore = getWonPointPlayerScore(matchScore, wonPointPlayerNumber);
+
+        var calculationService = new MatchScoreCalculationService(matchScore, wonPointPlayerScore);
 
         calculationService.updateMatchScore();
 
@@ -66,6 +68,14 @@ public class MatchScoreServlet extends HttpServlet {
 
         request.getRequestDispatcher("/WEB-INF/jsp/match-score.jsp")
                 .forward(request, response);
+    }
+
+    private PlayerScore getWonPointPlayerScore(MatchScore matchScore, int wonPointPlayerNumber) {
+        if (wonPointPlayerNumber == 1) {
+            return matchScore.getFirstPlayerScore();
+        } else {
+            return matchScore.getSecondPlayerScore();
+        }
     }
 
     private boolean isMatchWinnerDetermined(Match match) {

@@ -1,6 +1,6 @@
 package services;
 
-import models.CalculationOption;
+import models.CalculationMethod;
 import models.MatchScore;
 import models.PlayerScore;
 
@@ -8,7 +8,7 @@ public class MatchScoreCalculationService {
 
     private final MatchScore matchScore;
 
-    private final CalculationOption calculationOption;
+    private final CalculationMethod calculationMethod;
 
     private final PlayerScore wonPointPlayerScore;
 
@@ -18,91 +18,83 @@ public class MatchScoreCalculationService {
     public MatchScoreCalculationService(MatchScore matchScore, int wonPointPlayerNumber) {
         this.matchScore = matchScore;
 
-        calculationOption = matchScore.getCalculationOption();
+        calculationMethod = matchScore.getCalculationMethod();
 
         firstPlayerScore = matchScore.getFirstPlayerScore();
         secondPlayerScore = matchScore.getSecondPlayerScore();
 
-        if (wonPointPlayerNumber == 1) {
-            wonPointPlayerScore = firstPlayerScore;
-        } else {
-            wonPointPlayerScore = secondPlayerScore;
-        }
+        this.wonPointPlayerScore = wonPointPlayerScore;
     }
 
     public void updateMatchScore() {
-        if (calculationOption == CalculationOption.TIEBREAK) {
+        if (calculationMethod == CalculationMethod.TIEBREAK) {
             updateScoreOnTiebreak();
             return;
         }
 
         updatePointsAndGames();
-        updateSets();
+        updateSetPoints();
     }
 
     private void updatePointsAndGames() {
-        if (calculationOption == CalculationOption.ALL) {
+        if (calculationMethod == CalculationMethod.ALL) {
             updateScoreOnAll();
-        } else if (calculationOption == CalculationOption.DEUCE) {
+        } else if (calculationMethod == CalculationMethod.DEUCE) {
             updateScoreOnDeuce();
-        } else if (calculationOption == CalculationOption.ADVANTAGE) {
+        } else if (calculationMethod == CalculationMethod.ADVANTAGE) {
             updateScoreOnAdvantage();
         }
     }
 
-    private void updateSets() {
-        var firstPlayerGamesNumber = firstPlayerScore.getPlayerGames();
-        var secondPlayerGamesNumber = secondPlayerScore.getPlayerGames();
+    private void updateSetPoints() {
+        var firstPlayerGamesNumber = firstPlayerScore.getGamePoints();
+        var secondPlayerGamesNumber = secondPlayerScore.getGamePoints();
 
         if (firstPlayerGamesNumber == 6 || secondPlayerGamesNumber == 6) {
             if (hasSetWinner(firstPlayerGamesNumber, secondPlayerGamesNumber)) {
-                increaseScoreSets();
-                resetScoreGames();
+                increaseScoreSetPoints();
+                resetScoreGamePoints();
                 return;
             } else if (firstPlayerGamesNumber == 6 && secondPlayerGamesNumber == 6) {
-                matchScore.setCalculationOption(CalculationOption.TIEBREAK);
+                matchScore.setCalculationMethod(CalculationMethod.TIEBREAK);
                 return;
             }
         }
 
         if (firstPlayerGamesNumber == 7 || secondPlayerGamesNumber == 7) {
-            increaseScoreSets();
-            resetScoreGames();
+            increaseScoreSetPoints();
+            resetScoreGamePoints();
         }
     }
 
     private void updateScoreOnAll() {
-        if (calculationOption == CalculationOption.ALL) {
-            var currentPlayerPoints = wonPointPlayerScore.getPlayerPoints();
+        var currentPlayerPoints = wonPointPlayerScore.getPoints();
 
-            if (currentPlayerPoints != 40) {
-                increaseScorePoints();
-            } else {
-                if (hasGameWinner()) {
-                    increaseScoreGames();
-                    resetScorePoints();
-                } else {
-                    wonPointPlayerScore.setAdvantage(true);
-                    matchScore.setCalculationOption(CalculationOption.ADVANTAGE);
-                }
-            }
+        if (currentPlayerPoints != 40) {
+            increaseScorePoints();
+        } else if (hasGameWinner()) {
+            increaseScoreGamePoints();
+            resetScorePoints();
+        } else {
+            wonPointPlayerScore.setAdvantage(true);
+            matchScore.setCalculationMethod(CalculationMethod.ADVANTAGE);
         }
     }
 
     private void updateScoreOnDeuce() {
         wonPointPlayerScore.setAdvantage(true);
-        matchScore.setCalculationOption(CalculationOption.ADVANTAGE);
+        matchScore.setCalculationMethod(CalculationMethod.ADVANTAGE);
     }
 
     private void updateScoreOnAdvantage() {
         if (wonPointPlayerScore.hasAdvantage()) {
-            increaseScoreGames();
+            increaseScoreGamePoints();
             resetScorePoints();
             resetScoreAdvantages();
-            matchScore.setCalculationOption(CalculationOption.ALL);
+            matchScore.setCalculationMethod(CalculationMethod.ALL);
         } else {
             resetScoreAdvantages();
-            matchScore.setCalculationOption(CalculationOption.DEUCE);
+            matchScore.setCalculationMethod(CalculationMethod.DEUCE);
         }
     }
 
@@ -114,32 +106,32 @@ public class MatchScoreCalculationService {
 
         if (firstPlayerTiebreakPoints >= 7 || secondPlayerTiebreakPoints >= 7) {
             if (Math.abs(firstPlayerTiebreakPoints - secondPlayerTiebreakPoints) >= 2) {
-                increaseScoreSets();
-                resetScoreGames();
+                increaseScoreSetPoints();
+                resetScoreGamePoints();
                 resetScoreTiebreakPoints();
-                matchScore.setCalculationOption(CalculationOption.ALL);
+                matchScore.setCalculationMethod(CalculationMethod.ALL);
             }
         }
     }
 
     private void increaseScorePoints() {
-        var currentPlayerPoints = wonPointPlayerScore.getPlayerPoints();
+        var currentPlayerPoints = wonPointPlayerScore.getPoints();
 
         if (currentPlayerPoints < 30) {
-            wonPointPlayerScore.setPlayerPoints(currentPlayerPoints + 15);
+            wonPointPlayerScore.setPoints(currentPlayerPoints + 15);
         } else {
-            wonPointPlayerScore.setPlayerPoints(currentPlayerPoints + 10);
+            wonPointPlayerScore.setPoints(currentPlayerPoints + 10);
         }
     }
 
-    private void increaseScoreGames() {
-        var currentGamesNumber = wonPointPlayerScore.getPlayerGames();
-        wonPointPlayerScore.setPlayerGames(currentGamesNumber + 1);
+    private void increaseScoreGamePoints() {
+        var currentGamePoints = wonPointPlayerScore.getGamePoints();
+        wonPointPlayerScore.setGamePoints(currentGamePoints + 1);
     }
 
-    private void increaseScoreSets() {
-        var currentSetsNumber = wonPointPlayerScore.getPlayerSets();
-        wonPointPlayerScore.setPlayerSets(currentSetsNumber + 1);
+    private void increaseScoreSetPoints() {
+        var currentSetPoints = wonPointPlayerScore.getSetPoints();
+        wonPointPlayerScore.setSetPoints(currentSetPoints + 1);
     }
 
     private void increaseScoreTiebreakPoints() {
@@ -148,25 +140,25 @@ public class MatchScoreCalculationService {
     }
 
     private boolean hasGameWinner() {
-        var firstPlayerPoints = firstPlayerScore.getPlayerPoints();
-        var secondPlayerPoints = secondPlayerScore.getPlayerPoints();
+        var firstPlayerPoints = firstPlayerScore.getPoints();
+        var secondPlayerPoints = secondPlayerScore.getPoints();
 
         return firstPlayerPoints != secondPlayerPoints;
     }
 
-    private boolean hasSetWinner(int firstPlayerGamesNumber, int secondPlayerGamesNumber) {
-        return firstPlayerGamesNumber == 6 && secondPlayerGamesNumber < 5
-                || firstPlayerGamesNumber < 5 && secondPlayerGamesNumber == 6;
+    private boolean hasSetWinner(int firstPlayerGamePoints, int secondPlayerGamePoints) {
+        return firstPlayerGamePoints == 6 && secondPlayerGamePoints < 5
+                || firstPlayerGamePoints < 5 && secondPlayerGamePoints == 6;
     }
 
     private void resetScorePoints() {
-        firstPlayerScore.setPlayerPoints(0);
-        secondPlayerScore.setPlayerPoints(0);
+        firstPlayerScore.setPoints(0);
+        secondPlayerScore.setPoints(0);
     }
 
-    private void resetScoreGames() {
-        firstPlayerScore.setPlayerGames(0);
-        secondPlayerScore.setPlayerGames(0);
+    private void resetScoreGamePoints() {
+        firstPlayerScore.setGamePoints(0);
+        secondPlayerScore.setGamePoints(0);
     }
 
     private void resetScoreTiebreakPoints() {

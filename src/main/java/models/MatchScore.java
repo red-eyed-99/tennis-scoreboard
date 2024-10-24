@@ -10,5 +10,5 @@ public class MatchScore {
 
     private final PlayerScore secondPlayerScore = new PlayerScore();
 
-    private CalculationOption calculationOption = CalculationOption.ALL;
+    private CalculationMethod calculationMethod = CalculationMethod.ALL;
 }

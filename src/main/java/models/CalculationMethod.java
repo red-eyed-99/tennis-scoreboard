@@ -1,6 +1,6 @@
 package models;
 
-public enum CalculationOption {
+public enum CalculationMethod {
     ALL,
     DEUCE,
     ADVANTAGE,

@@ -7,6 +7,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.Cleanup;
 import models.CalculationOption;
+import models.CalculationMethod;
+import models.MatchScore;
 import models.entities.Match;
 import services.FinishedMatchesPersistenceService;
 import services.MatchScoreCalculationService;
@@ -41,7 +43,7 @@ public class MatchScoreServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         var uuid = request.getParameter("uuid");
-        var wonPointPlayerNumber = Integer.valueOf(request.getParameter("point"));
+        var wonPointPlayerNumber = Integer.parseInt(request.getParameter("point"));
 
         var match = OngoingMatchesService.getOngoingMatches()
                 .get(UUID.fromString(uuid));
@@ -69,15 +71,12 @@ public class MatchScoreServlet extends HttpServlet {
     private boolean isMatchWinnerDetermined(Match match) {
         var matchScore = match.getMatchScore();
 
-        var firstPlayerSetsNumber = matchScore.getFirstPlayerScore()
-                .getPlayerSets();
+        var firstPlayerSetPoints = matchScore.getFirstPlayerScore().getSetPoints();
+        var secondPlayerSetPoints = matchScore.getSecondPlayerScore().getSetPoints();
 
-        var secondPlayerSetsNumber = matchScore.getSecondPlayerScore()
-                .getPlayerSets();
+        if (firstPlayerSetPoints == 2 || secondPlayerSetPoints == 2) {
 
-        if (firstPlayerSetsNumber == 2 || secondPlayerSetsNumber == 2) {
-
-            if (firstPlayerSetsNumber > secondPlayerSetsNumber) {
+            if (firstPlayerSetPoints > secondPlayerSetPoints) {
                 match.setWinner(match.getFirstPlayer());
             } else {
                 match.setWinner(match.getSecondPlayer());
@@ -98,7 +97,7 @@ public class MatchScoreServlet extends HttpServlet {
         request.setAttribute("firstPlayerScore", matchScore.getFirstPlayerScore());
         request.setAttribute("secondPlayerScore", matchScore.getSecondPlayerScore());
 
-        if (matchScore.getCalculationOption() == CalculationOption.TIEBREAK) {
+        if (matchScore.getCalculationMethod() == CalculationMethod.TIEBREAK) {
             request.setAttribute("tiebreak", true);
         }
 

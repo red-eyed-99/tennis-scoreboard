@@ -76,8 +76,7 @@ public class MatchScoreCalculationService {
             increaseScoreGamePoints();
             resetScorePoints();
         } else {
-            wonPointPlayerScore.setAdvantage(true);
-            matchScore.setCalculationMethod(CalculationMethod.ADVANTAGE);
+            updateScoreOnDeuce();
         }
     }
 

@@ -104,7 +104,7 @@ public class MatchScoreCalculationService {
         var secondPlayerTiebreakPoints = secondPlayerScore.getTiebreakPoints();
 
         if (firstPlayerTiebreakPoints >= 7 || secondPlayerTiebreakPoints >= 7) {
-            if (Math.abs(firstPlayerTiebreakPoints - secondPlayerTiebreakPoints) >= 2) {
+            if (hasTiebreakWinner(firstPlayerTiebreakPoints, secondPlayerTiebreakPoints)) {
                 increaseScoreSetPoints();
                 resetScoreGamePoints();
                 resetScoreTiebreakPoints();
@@ -148,6 +148,10 @@ public class MatchScoreCalculationService {
     private boolean hasSetWinner(int firstPlayerGamePoints, int secondPlayerGamePoints) {
         return firstPlayerGamePoints == 6 && secondPlayerGamePoints < 5
                 || firstPlayerGamePoints < 5 && secondPlayerGamePoints == 6;
+    }
+
+    private boolean hasTiebreakWinner(int firstPlayerTiebreakPoints, int secondPlayerTiebreakPoints) {
+        return Math.abs(firstPlayerTiebreakPoints - secondPlayerTiebreakPoints) >= 2;
     }
 
     private void resetScorePoints() {

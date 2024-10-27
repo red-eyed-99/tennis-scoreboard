@@ -1,22 +1,17 @@
 package testutils;
 
+import lombok.AllArgsConstructor;
 import models.CalculationMethod;
 import models.MatchScore;
 import models.PlayerScore;
 
+@AllArgsConstructor
 public class MatchScoreConfigurator {
 
     private final MatchScore matchScore;
 
     private final PlayerScore wonPointPlayerScore;
     private final PlayerScore anotherPlayerScore;
-
-    public MatchScoreConfigurator(MatchScore matchScore, PlayerScore wonPointPlayerScore, PlayerScore anotherPlayerScore) {
-        this.matchScore = matchScore;
-
-        this.wonPointPlayerScore = wonPointPlayerScore;
-        this.anotherPlayerScore = anotherPlayerScore;
-    }
 
     public void setAllMatchScore(int wonPointPlayerPoints, int anotherPlayerPoints) {
         wonPointPlayerScore.setPoints(wonPointPlayerPoints);

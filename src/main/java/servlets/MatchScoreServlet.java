@@ -10,7 +10,7 @@ import models.CalculationMethod;
 import models.MatchScore;
 import models.PlayerScore;
 import models.entities.Match;
-import services.FinishedMatchesPersistenceService;
+import services.FinishedMatchesService;
 import services.MatchScoreCalculationService;
 import services.OngoingMatchesService;
 import utils.HibernateUtil;
@@ -120,7 +120,7 @@ public class MatchScoreServlet extends HttpServlet {
         @Cleanup
         var session = HibernateUtil.getSession();
 
-        var finishedMatchesService = new FinishedMatchesPersistenceService(session);
+        var finishedMatchesService = new FinishedMatchesService(session);
 
         finishedMatchesService.persist(match);
     }

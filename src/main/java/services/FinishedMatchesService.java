@@ -6,13 +6,13 @@ import repositories.MatchRepository;
 
 import java.util.List;
 
-public class FinishedMatchesPersistenceService {
+public class FinishedMatchesService {
 
     private final Session session;
 
     private final MatchRepository matchRepository;
 
-    public FinishedMatchesPersistenceService(Session session) {
+    public FinishedMatchesService(Session session) {
         this.session = session;
         matchRepository = new MatchRepository(session);
     }
@@ -38,10 +38,10 @@ public class FinishedMatchesPersistenceService {
     public List<Match> findAll() {
         session.beginTransaction();
 
-        var match = matchRepository.findAll();
+        var matches = matchRepository.findAll();
 
         session.getTransaction().commit();
 
-        return match;
+        return matches;
     }
 }

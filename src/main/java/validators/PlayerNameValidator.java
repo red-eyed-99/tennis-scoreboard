@@ -6,7 +6,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class PlayerNameValidator {
 
-    public void validate(String playerName) {
+    public void validate(String playerName) throws PlayerNameValidationException {
         playerName = playerName.stripTrailing();
 
         if (playerName.isBlank()) {

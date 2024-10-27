@@ -15,8 +15,15 @@ public class MatchRepository implements Repository<Match> {
         session.persist(match);
     }
 
+    public List<Match> findByPlayerName(String playerName) {
+        var hql = "select m from Match m where firstPlayer.name=:playerName or secondPlayer.name=:playerName";
+        return session.createQuery(hql, Match.class)
+                .setParameter("playerName", playerName)
+                .list();
+    }
+
     public List<Match> findAll() {
         return session.createQuery("select m from Match m", Match.class)
-                .getResultList();
+                .list();
     }
 }

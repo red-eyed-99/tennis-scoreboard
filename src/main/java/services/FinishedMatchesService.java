@@ -25,6 +25,16 @@ public class FinishedMatchesPersistenceService {
         session.getTransaction().commit();
     }
 
+    public List<Match> findByPlayerName(String name) {
+        session.beginTransaction();
+
+        var matches = matchRepository.findByPlayerName(name);
+
+        session.getTransaction().commit();
+
+        return matches;
+    }
+
     public List<Match> findAll() {
         session.beginTransaction();
 

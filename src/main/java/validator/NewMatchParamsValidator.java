@@ -1,22 +1,24 @@
-package validators;
+package validator;
 
 import exceptions.PlayerNameValidationException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.experimental.UtilityClass;
-import utils.RequestAttributeNames;
-import utils.RequestParameter;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-@UtilityClass
-public class RequestParameterValidator {
+import static utils.NewMatchAttributeNames.*;
 
-    public boolean parametersAreValid(HttpServletRequest request, List<RequestParameter> parameters) {
+@UtilityClass
+public class NewMatchParamsValidator {
+
+    public boolean parametersAreValid(HttpServletRequest request, RequestParameter[] parameters) {
         var validationResults = new HashMap<RequestParameter, ValidationResult>();
 
-        parameters.forEach(parameter -> validationResults.put(parameter, validatePlayerName(parameter.getValue())));
+        for (var parameter : parameters) {
+            var validationResult = validatePlayerName(parameter.getValue());
+            validationResults.put(parameter, validationResult);
+        }
 
         configureRequestAttributes(request, validationResults);
 
@@ -56,10 +58,11 @@ public class RequestParameterValidator {
     }
 
     private String defineErrorMessageAttributeName(String requestParameterName) {
-        if (requestParameterName.equals(RequestAttributeNames.FIRST_PLAYER_NAME)) {
-            return RequestAttributeNames.FIRST_PLAYER_ERROR_MESSAGE;
+
+        if (requestParameterName.equals(FIRST_PLAYER_NAME)) {
+            return FIRST_PLAYER_ERROR_MESSAGE;
         }
 
-        return RequestAttributeNames.SECOND_PLAYER_ERROR_MESSAGE;
+        return SECOND_PLAYER_ERROR_MESSAGE;
     }
 }

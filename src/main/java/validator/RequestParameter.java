@@ -1,4 +1,4 @@
-package utils;
+package validator;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

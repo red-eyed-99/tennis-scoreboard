@@ -3,7 +3,7 @@ package utils;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
-public class RequestAttributeNames {
+public class NewMatchAttributeNames {
 
     public final String FIRST_PLAYER_NAME = "firstPlayerName";
     public final String SECOND_PLAYER_NAME = "secondPlayerName";

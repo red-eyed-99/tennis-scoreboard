@@ -1,4 +1,4 @@
-package utils;
+package paginator;
 
 import exceptions.PageNotFoundException;
 import lombok.Getter;
@@ -10,6 +10,9 @@ import java.util.List;
 public class MatchesPaginator {
 
     private static final int PAGE_ROWS_NUMBER = 5;
+
+    private static final int MAX_VISIBLE_PAGES = 5;
+    private static final int OFFSET_FROM_CURRENT_PAGE = 2;
 
     @Getter
     private final int totalPages;
@@ -71,12 +74,12 @@ public class MatchesPaginator {
         }
 
         if (pageNumber == totalPages || pageNumber == totalPages - 1) {
-            if (totalPages - PAGE_ROWS_NUMBER >= 0) {
-                return totalPages - PAGE_ROWS_NUMBER + 1;
+            if (totalPages - MAX_VISIBLE_PAGES >= 0) {
+                return totalPages - MAX_VISIBLE_PAGES + 1;
             }
         }
 
-        return pageNumber - 2;
+        return pageNumber - OFFSET_FROM_CURRENT_PAGE;
     }
 
     private int determineEndPageNumber(int pageNumber) {
@@ -86,11 +89,15 @@ public class MatchesPaginator {
         }
 
         if (pageNumber == 1 || pageNumber == 2) {
-            if (totalPages >= PAGE_ROWS_NUMBER) {
-                return PAGE_ROWS_NUMBER;
+            if (totalPages >= MAX_VISIBLE_PAGES) {
+                return MAX_VISIBLE_PAGES;
             }
         }
 
-        return pageNumber + 2;
+        if (totalPages <= MAX_VISIBLE_PAGES) {
+            return totalPages;
+        }
+
+        return pageNumber + OFFSET_FROM_CURRENT_PAGE;
     }
 }

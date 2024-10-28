@@ -1,11 +1,11 @@
 package servlets;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.Cleanup;
+import lombok.SneakyThrows;
 import models.CalculationMethod;
 import models.MatchScore;
 import models.PlayerScore;
@@ -15,20 +15,15 @@ import services.MatchScoreCalculationService;
 import services.OngoingMatchesService;
 import utils.HibernateUtil;
 
-import java.io.IOException;
 import java.util.UUID;
-
 
 @WebServlet("/match-score")
 public class MatchScoreServlet extends HttpServlet {
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    @Override
+    @SneakyThrows
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         var uuid = request.getParameter("uuid");
-
-        if (!uuid.matches("^[a-fA-F\\d]{8}-[a-fA-F\\d]{4}-[a-fA-F\\d]{4}-[a-fA-F\\d]{4}-[a-fA-F\\d]{12}$")) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST);
-            return;
-        }
 
         var ongoingMatches = OngoingMatchesService.getOngoingMatches();
 
@@ -41,13 +36,27 @@ public class MatchScoreServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    @SneakyThrows
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         var uuid = request.getParameter("uuid");
         var wonPointPlayerNumber = Integer.parseInt(request.getParameter("point"));
 
         var match = OngoingMatchesService.getOngoingMatches()
                 .get(UUID.fromString(uuid));
 
+        updateMatchScore(match, wonPointPlayerNumber);
+
+        if (isMatchWinnerDetermined(match)) {
+            processFinishedMatch(request, response, match, uuid);
+        }
+
+        configureRequestAttributes(request, match);
+
+        request.getRequestDispatcher("/WEB-INF/jsp/match-score.jsp")
+                .forward(request, response);
+    }
+
+    private void updateMatchScore(Match match, int wonPointPlayerNumber) {
         var matchScore = match.getMatchScore();
 
         var wonPointPlayerScore = getWonPointPlayerScore(matchScore, wonPointPlayerNumber);
@@ -55,19 +64,6 @@ public class MatchScoreServlet extends HttpServlet {
         var calculationService = new MatchScoreCalculationService(matchScore, wonPointPlayerScore);
 
         calculationService.updateMatchScore();
-
-        if (isMatchWinnerDetermined(match)) {
-            OngoingMatchesService.removeFinishedMatch(UUID.fromString(uuid));
-            saveFinishedMatch(match);
-            configureRequestAttributes(request, match);
-            request.getRequestDispatcher("/WEB-INF/jsp/match-result.jsp")
-                    .forward(request, response);
-        }
-
-        configureRequestAttributes(request, match);
-
-        request.getRequestDispatcher("/WEB-INF/jsp/match-score.jsp")
-                .forward(request, response);
     }
 
     private PlayerScore getWonPointPlayerScore(MatchScore matchScore, int wonPointPlayerNumber) {
@@ -96,6 +92,18 @@ public class MatchScoreServlet extends HttpServlet {
         }
 
         return false;
+    }
+
+    @SneakyThrows
+    private void processFinishedMatch(HttpServletRequest request, HttpServletResponse response, Match match, String uuid) {
+        OngoingMatchesService.removeFinishedMatch(UUID.fromString(uuid));
+
+        saveFinishedMatch(match);
+
+        configureRequestAttributes(request, match);
+
+        request.getRequestDispatcher("/WEB-INF/jsp/match-result.jsp")
+                .forward(request, response);
     }
 
     private void configureRequestAttributes(HttpServletRequest request, Match match) {

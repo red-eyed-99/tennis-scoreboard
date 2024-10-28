@@ -1,4 +1,4 @@
-package validators;
+package validator;
 
 import exceptions.PlayerNameValidationException;
 import lombok.experimental.UtilityClass;
@@ -7,11 +7,12 @@ import lombok.experimental.UtilityClass;
 public class PlayerNameValidator {
 
     public void validate(String playerName) throws PlayerNameValidationException {
-        playerName = playerName.stripTrailing();
 
-        if (playerName.isBlank()) {
+        if (playerName == null || playerName.isBlank()) {
             throw new PlayerNameValidationException("Player name must not be empty");
         }
+
+        playerName = playerName.stripTrailing();
 
         if (playerName.length() > 40) {
             throw new PlayerNameValidationException("Player name must be no more than 40 characters");

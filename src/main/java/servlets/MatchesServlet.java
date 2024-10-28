@@ -41,12 +41,15 @@ public class MatchesServlet extends HttpServlet {
 
         var pagesRange = matchesPaginator.getPagesRange(pageNumber);
 
+        request.setAttribute("totalMatches", finishedMatches.size());
+        request.setAttribute("matchesToShow", matchesToShow);
+
+        request.setAttribute("filterPlayerName", filterByPlayerName);
+
         request.setAttribute("startPageNumber", pagesRange.getStartPageNumber());
         request.setAttribute("endPageNumber", pagesRange.getEndPageNumber());
-
-        request.setAttribute("totalMatches", finishedMatches.size());
         request.setAttribute("currentPage", pageNumber);
-        request.setAttribute("matchesToShow", matchesToShow);
+        request.setAttribute("totalPages", matchesPaginator.getTotalPages());
 
         request.getRequestDispatcher("/WEB-INF/jsp/matches.jsp")
                 .forward(request, response);
@@ -57,7 +60,9 @@ public class MatchesServlet extends HttpServlet {
         var session = HibernateUtil.getSession();
 
         if (filterByPlayerName != null) {
-            return new FinishedMatchesService(session).findByPlayerName(filterByPlayerName);
+            if (!filterByPlayerName.isBlank()) {
+                return new FinishedMatchesService(session).findByPlayerName(filterByPlayerName);
+            }
         }
 
         return new FinishedMatchesService(session).findAll();

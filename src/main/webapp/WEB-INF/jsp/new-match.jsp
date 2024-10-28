@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
+<jsp:include page="navigation-bar.jsp"/>
 <div class="new-match-block">
     <h1>New match</h1>
     <form action="${pageContext.request.contextPath}/new-match" method="post">

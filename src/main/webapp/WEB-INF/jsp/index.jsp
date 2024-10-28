@@ -2,10 +2,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Tennis scoreboard</title>
+    <title>Tennis scoreboard</title>
 </head>
 <body>
-  <a href="${pageContext.request.contextPath}/new-match">New match</a>
-  <a href="${pageContext.request.contextPath}/matches">Matches</a>
+<jsp:include page="navigation-bar.jsp"/>
 </body>
 </html>

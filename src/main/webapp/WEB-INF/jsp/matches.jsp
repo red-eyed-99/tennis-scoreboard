@@ -5,6 +5,7 @@
     <title>Matches</title>
 </head>
 <body>
+<jsp:include page="navigation-bar.jsp"/>
 <h1>History of matches</h1>
 <div>
     <form method="get">

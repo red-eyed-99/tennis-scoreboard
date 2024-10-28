@@ -1,10 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
     <title>Match score</title>
 </head>
 <body>
+<jsp:include page="navigation-bar.jsp"/>
 <div class="match-score-block">
     <table>
         <caption>Match score</caption>

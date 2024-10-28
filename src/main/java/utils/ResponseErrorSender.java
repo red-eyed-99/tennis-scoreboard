@@ -1,16 +1,19 @@
 package utils;
 
+import exceptions.BadRequestException;
 import exceptions.PageNotFoundException;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.SneakyThrows;
+import lombok.experimental.UtilityClass;
 
-import java.io.IOException;
-
+@UtilityClass
 public class ResponseErrorSender {
 
-    public static void sendError(HttpServletResponse response, Exception exception) throws IOException {
+    @SneakyThrows
+    public void sendError(HttpServletResponse response, Exception exception) {
 
-        if (exception instanceof NumberFormatException) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid page number");
+        if (exception instanceof BadRequestException) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, exception.getMessage());
         }
 
         if (exception instanceof PageNotFoundException) {

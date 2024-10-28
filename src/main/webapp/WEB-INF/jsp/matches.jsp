@@ -8,48 +8,67 @@
 <jsp:include page="navigation-bar.jsp"/>
 <h1>History of matches</h1>
 <div>
-    <form method="get">
+    <form class="player-name-filter-form">
         <label for="player-name-filter">Player name</label>
         <input type="text" id="player-name-filter" name="filter_by_player_name"
-               placeholder="Search match by player name">
-        <button type="submit" name="filter_by_player_name">Find</button>
+               placeholder="Search match by player name" value="${filterPlayerName}">
+        <button type="submit" name="filter_by_player_name">Search</button>
     </form>
-    <form>
-        <table>
-            <thead>
+    <table class="matches-table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>First player</th>
+            <th>Second player</th>
+            <th>Winner</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <c:if test="${matchesToShow.size() == 0}">
             <tr>
-                <th>Id</th>
-                <th>First player</th>
-                <th>Second player</th>
-                <th>Winner</th>
+                <td>No matches</td>
             </tr>
-            </thead>
-            <tbody>
-            <c:if test="${matchesToShow.size() == 0}">
-                <tr>
-                    <td>No matches</td>
-                </tr>
-            </c:if>
-            <c:if test="${matchesToShow.size() > 0}">
-                <c:forEach var="match" items="${matchesToShow}">
-                    <tr>
-                        <td><c:out value="${match.getId()}"/></td>
-                        <td><c:out value="${match.getFirstPlayer().getName()}"/></td>
-                        <td><c:out value="${match.getSecondPlayer().getName()}"/></td>
-                        <td><c:out value="${match.getWinner().getName()}"/></td>
-                    </tr>
-                </c:forEach>
-            </c:if>
-            </tbody>
-        </table>
-        <c:if test="${matchesToShow.size() < totalMatches}">
-            <c:forEach var="index" begin="${requestScope.startPageNumber}" end="${requestScope.endPageNumber}">
-                <button
-                        <c:if test="${requestScope.currentPage == index}">class="currentPage"</c:if>
-                        type="submit" name="page" value="${index}">${index}</button>
-            </c:forEach>
         </c:if>
-    </form>
+
+        <c:if test="${matchesToShow.size() > 0}">
+
+            <c:forEach var="match" items="${matchesToShow}">
+                <tr>
+                    <td><c:out value="${match.getId()}"/></td>
+                    <td><c:out value="${match.getFirstPlayer().getName()}"/></td>
+                    <td><c:out value="${match.getSecondPlayer().getName()}"/></td>
+                    <td><c:out value="${match.getWinner().getName()}"/></td>
+                </tr>
+            </c:forEach>
+
+        </c:if>
+
+        </tbody>
+    </table>
+    <div class="pagination-block">
+
+        <c:set var="filterByPlayerName" value="&amp;filter_by_player_name=${filterPlayerName}"/>
+
+        <c:if test="${matchesToShow.size() < totalMatches}">
+
+            <c:if test="${totalPages > 5}">
+                <a href="?page=1<c:if test='${not empty filterPlayerName}'>${filterByPlayerName}</c:if>">|<-</a>
+            </c:if>
+
+            <c:forEach var="index" begin="${requestScope.startPageNumber}" end="${requestScope.endPageNumber}">
+
+                <a href="?page=${index}<c:if test='${not empty filterPlayerName}'>${filterByPlayerName}</c:if>"
+                   <c:if test="${requestScope.currentPage == index}">class="currentPage"</c:if>>${index}</a>
+
+            </c:forEach>
+
+            <c:if test="${totalPages > 5}">
+                <a href="?page=${totalPages}<c:if test='${not empty filterPlayerName}'>${filterByPlayerName}</c:if>">->|</a>
+            </c:if>
+
+        </c:if>
+    </div>
 </div>
 </body>
 </html>

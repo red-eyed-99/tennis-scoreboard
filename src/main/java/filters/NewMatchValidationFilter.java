@@ -31,6 +31,9 @@ public class NewMatchValidationFilter implements Filter {
 
                 return;
             }
+
+            request.setAttribute("first-player", firstPlayerName.stripTrailing());
+            request.setAttribute("second-player", secondPlayerName.stripTrailing());
         }
 
         filterChain.doFilter(request, response);

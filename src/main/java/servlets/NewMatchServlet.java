@@ -29,8 +29,8 @@ public class NewMatchServlet extends HttpServlet {
     @Override
     @SneakyThrows
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-        var firstPlayerName = request.getParameter("first-player");
-        var secondPlayerName = request.getParameter("second-player");
+        var firstPlayerName = (String) request.getAttribute("first-player");
+        var secondPlayerName = (String) request.getAttribute("second-player");
 
         var players = getPlayers(firstPlayerName, secondPlayerName);
 

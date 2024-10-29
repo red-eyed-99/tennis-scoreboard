@@ -9,7 +9,7 @@
 </head>
 <body>
 <jsp:include page="navigation-bar.jsp"/>
-<div class="new-match-block">
+<div id="new-match-block" class="main-block">
     <h1>New match</h1>
     <form action="${pageContext.request.contextPath}/new-match" method="post">
         <div class="form-block">
@@ -40,6 +40,12 @@
         </div>
         <button type="submit">Start</button>
     </form>
+</div>
+<div class="tennis-players-block">
+    <img id="tennis-player1" class="tennis-player" src="${pageContext.request.contextPath}/images/tennis-player1.png" alt="tennis player1"/>
+    <img id="tennis-player2" class="tennis-player" src="${pageContext.request.contextPath}/images/tennis-player2.jpg" alt="tennis player2"/>
+    <img id="tennis-player3" class="tennis-player" src="${pageContext.request.contextPath}/images/tennis-player3.jpg" alt="tennis player3"/>
+    <img id="tennis-player4" class="tennis-player" src="${pageContext.request.contextPath}/images/tennis-player4.jpg" alt="tennis player4"/>
 </div>
 </body>
 </html>

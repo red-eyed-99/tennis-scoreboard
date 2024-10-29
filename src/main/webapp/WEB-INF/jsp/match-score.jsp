@@ -1,13 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<html>
+<html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Match score</title>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
 <jsp:include page="navigation-bar.jsp"/>
-<div class="match-score-block">
+<div id="match-score-block" class="main-block">
     <table>
         <caption>Match score</caption>
         <thead>

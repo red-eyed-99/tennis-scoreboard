@@ -20,10 +20,22 @@ public class NewMatchParamsValidator {
             validationResults.put(parameter, validationResult);
         }
 
+        if (playerNamesAreEquals(parameters)) {
+            validationResults.put(parameters[1], new ValidationResult(ValidationStatus.INVALID,
+                    "Player names must not be equals"));
+        }
+
         configureRequestAttributes(request, validationResults);
 
         return validationResults.values().stream()
                 .noneMatch(validationResult -> validationResult.getErrorMessage() != null);
+    }
+
+    private boolean playerNamesAreEquals(RequestParameter[] parameters) {
+        var firstPlayerName = parameters[0].getValue();
+        var secondPlayerName = parameters[1].getValue();
+
+        return firstPlayerName.equalsIgnoreCase(secondPlayerName);
     }
 
     private ValidationResult validatePlayerName(String playerName) {

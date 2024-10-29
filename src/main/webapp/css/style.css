@@ -1,7 +1,51 @@
 @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
 
-body {
+* {
     font-family: "Chakra Petch", sans-serif;
+}
+
+@media (max-width: 540px) {
+    .tennis-players-block {
+        display: none;
+    }
+}
+
+@media (max-width: 960px) {
+    #tennis-player3 {
+        display: none;
+    }
+
+    #tennis-player4 {
+        display: none;
+    }
+}
+
+nav {
+    background-color: yellowgreen;
+    padding-left: 20px;
+}
+
+nav a {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 0 10px;
+    margin-right: 50px;
+    color: black;
+    font-size: 30px;
+    text-wrap: nowrap;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: white;
+}
+
+.nav-icon {
+    width: 30px;
+}
+
+body {
+    margin: 0;
     font-weight: 400;
     font-style: normal;
 }
@@ -10,11 +54,31 @@ h1 {
     text-align: center;
 }
 
-.new-match-block {
+.tennis-players {
+    display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 120px;
+    width: 100%;
+    max-width: 480px;
+}
+
+.main-block {
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    border: 5px solid yellowgreen;
+    border-radius: 15px;
+}
+
+#new-match-block {
     max-width: 500px;
-    background-color: aliceblue;
+}
+
+#match-score-block {
+    max-width: 1500px;
+    width: 80%;
 }
 
 .form-block {
@@ -25,28 +89,91 @@ h1 {
 }
 
 label {
+    display: block;
     font-weight: bold;
+    margin-top: 15px;
 }
 
 input {
     display: block;
-    margin: 10px auto 30px auto;
+    margin: 10px auto 20px auto;
     width: 100%;
     font-size: 35px;
-    border: 2px solid;
+    border: 3px solid yellowgreen;
     border-radius: 5px;
+    background-color: whitesmoke;
 }
 
 button {
     display: block;
+    margin-top: 25px;
     margin-left: auto;
     margin-right: auto;
     padding-left: 20px;
     padding-right: 20px;
     font-size: 30px;
-    background-color: gainsboro;
+    background-color: yellowgreen;
+    border: 2px solid black;
+    border-radius: 25px;
+}
+
+button:hover {
+    color: white;
+    cursor: pointer;
 }
 
 .error-message {
     color: red;
+}
+
+.tennis-players-block {
+    margin: 50px auto 0 auto;
+    width: 100%;
+    text-align: center;
+}
+
+.tennis-player {
+    height: 190px;
+}
+
+#tennis-player1 {
+    margin-right: 100px;
+}
+
+#tennis-player4 {
+    margin-left: 100px;
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+    text-align: center;
+}
+
+caption {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+th {
+    font-size: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+}
+
+th:first-child {
+    width: 28%;
+}
+
+th {
+    width: 18%;
+}
+
+td {
+    font-size: 25px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

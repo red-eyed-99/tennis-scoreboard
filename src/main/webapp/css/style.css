@@ -147,6 +147,7 @@ button:hover {
 table {
     table-layout: fixed;
     width: 100%;
+    margin-bottom: 60px;
     text-align: center;
 }
 
@@ -157,6 +158,8 @@ caption {
 }
 
 th {
+    width: 18%;
+    padding-bottom: 25px;
     font-size: 30px;
     white-space: nowrap;
     overflow: hidden;
@@ -167,13 +170,24 @@ th:first-child {
     width: 28%;
 }
 
-th {
-    width: 18%;
-}
-
 td {
     font-size: 25px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    border-right: 2px solid yellowgreen
+
+}
+
+tr:first-child td {
+    border-bottom: 2px solid yellowgreen;
+}
+
+td:last-child {
+    border-right: none;
+}
+
+.win-point-button {
+    padding-top: 15px;
+    padding-bottom: 15px;
 }

@@ -45,8 +45,8 @@
         </tbody>
     </table>
     <form method="post">
-        <button type="submit" name="point" value="1">First player wins a point</button>
-        <button type="submit" name="point" value="2">Second player wins a point</button>
+        <button class="win-point-button" type="submit" name="point" value="1">First player wins a point</button>
+        <button class="win-point-button" type="submit" name="point" value="2">Second player wins a point</button>
     </form>
 </div>
 </body>

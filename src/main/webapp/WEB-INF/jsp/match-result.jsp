@@ -28,9 +28,9 @@
     </table>
 </div>
 <div class="tennis-players-block">
-    <img class="tennis-player" src="${pageContext.request.contextPath}/images/tennis-player9.png" alt="tennis player"/>
-    <img class="tennis-player" src="${pageContext.request.contextPath}/images/tennis-player10.jpg" alt="tennis player"/>
-    <img class="tennis-player" src="${pageContext.request.contextPath}/images/tennis-player11.jpg" alt="tennis player"/>
+    <img class="tennis-player" src="${pageContext.request.contextPath}/images/tennis-player5.png" alt="tennis player"/>
+    <img class="tennis-player" src="${pageContext.request.contextPath}/images/tennis-player6.jpg" alt="tennis player"/>
+    <img class="tennis-player" src="${pageContext.request.contextPath}/images/tennis-player7.jpg" alt="tennis player"/>
 </div>
 </body>
 </html>

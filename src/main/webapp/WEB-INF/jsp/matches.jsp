@@ -8,15 +8,15 @@
 </head>
 <body>
 <jsp:include page="navigation-bar.jsp"/>
-<h1>History of matches</h1>
-<div class="main-block">
+<div id="matches-block" class="main-block">
+    <h1>History of matches</h1>
     <form class="player-name-filter-form">
-        <label for="player-name-filter">Player name</label>
+        <label for="player-name-filter">Search matches by player name</label>
         <input type="text" id="player-name-filter" name="filter_by_player_name"
-               placeholder="Search match by player name" value="${filterPlayerName}">
+               placeholder="Alexander Zverev" value="${filterPlayerName}">
         <button type="submit" name="filter_by_player_name">Search</button>
     </form>
-    <table class="matches-table">
+    <table id="matches-table">
         <thead>
         <tr>
             <th>Id</th>
@@ -29,7 +29,7 @@
 
         <c:if test="${matchesToShow.size() == 0}">
             <tr>
-                <td>No matches</td>
+                <td colspan="4">No matches</td>
             </tr>
         </c:if>
 
@@ -55,18 +55,31 @@
         <c:if test="${matchesToShow.size() < totalMatches}">
 
             <c:if test="${totalPages > 5}">
-                <a href="?page=1<c:if test='${not empty filterPlayerName}'>${filterByPlayerName}</c:if>">|<-</a>
+                <div class="page-block">
+                    <a href="?page=1<c:if test='${not empty filterPlayerName}'>${filterByPlayerName}</c:if>">
+                        <img class="page-icon" src="${pageContext.request.contextPath}/images/first-page-icon.png" alt="first page"/>
+                    </a>
+                </div>
             </c:if>
 
             <c:forEach var="index" begin="${requestScope.startPageNumber}" end="${requestScope.endPageNumber}">
 
-                <a href="?page=${index}<c:if test='${not empty filterPlayerName}'>${filterByPlayerName}</c:if>"
-                   <c:if test="${requestScope.currentPage == index}">class="currentPage"</c:if>>${index}</a>
+                <div class="page-block">
+                    <a href="?page=${index}<c:if test='${not empty filterPlayerName}'>${filterByPlayerName}</c:if>"
+                    <c:if test="${requestScope.currentPage == index}">class="currentPage"</c:if>>
+                        <img class="page-icon" src="${pageContext.request.contextPath}/images/tennis-ball-icon.png" alt=""/>
+                        <span class="overlay-page-number">${index}</span>
+                    </a>
+                </div>
 
             </c:forEach>
 
             <c:if test="${totalPages > 5}">
-                <a href="?page=${totalPages}<c:if test='${not empty filterPlayerName}'>${filterByPlayerName}</c:if>">->|</a>
+                <div class="page-block">
+                    <a href="?page=${totalPages}<c:if test='${not empty filterPlayerName}'>${filterByPlayerName}</c:if>">
+                        <img class="page-icon" src="${pageContext.request.contextPath}/images/last-page-icon.png" alt="last page"/>
+                    </a>
+                </div>
             </c:if>
 
         </c:if>

@@ -20,6 +20,12 @@
     }
 }
 
+@media (max-width: 640px) {
+    .pagination-block {
+        display: contents;
+    }
+}
+
 nav {
     background-color: yellowgreen;
     padding-left: 20px;
@@ -231,4 +237,92 @@ td:last-child {
 .win-point-button {
     padding-top: 15px;
     padding-bottom: 15px;
+}
+
+#matches-block {
+    max-width: 1000px;
+}
+
+.player-name-filter-form {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    text-align: center;
+}
+
+.player-name-filter-form button {
+    display: inline-block;
+}
+
+#player-name-filter {
+    display: inline-block;
+    width: 80%;
+    margin-right: 10px;
+}
+
+#matches-table th {
+    width: 30%;
+    padding-bottom: 25px;
+    font-size: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+}
+
+#matches-table th:first-child {
+    width: 10%;
+}
+
+#matches-table td {
+    font-size: 25px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-right: 2px solid yellowgreen;
+    border-bottom: 2px solid yellowgreen;
+}
+
+#matches-table td:last-child {
+    border-right: none;
+}
+
+#matches-table tr:last-child td {
+    border-bottom: none;
+}
+
+.page-icon {
+    height: 50px;
+    width: 50px;
+}
+
+.pagination-block {
+    text-align: center;
+}
+
+.page-block {
+    display: inline-block;
+    position: relative;
+    margin-right: 35px;
+}
+
+.page-block:last-child {
+    margin-right: 0;
+}
+
+.page-block img {
+    display: block;
+}
+
+.overlay-page-number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    font-size: 25px;
+    text-shadow: 2px 2px 4px;
+}
+
+.overlay-page-number:hover {
+    color: white;
 }

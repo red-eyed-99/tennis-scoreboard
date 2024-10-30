@@ -27,7 +27,10 @@ public class MatchScoreServlet extends HttpServlet {
 
         var match = OngoingMatchesService.findMatch(UUID.fromString(uuid));
 
-        var match = ongoingMatches.get(UUID.fromString(uuid));
+        if (match.isEmpty()) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, "Match not found");
+            return;
+        }
 
         configureRequestAttributes(request, match.get());
 
@@ -41,9 +44,12 @@ public class MatchScoreServlet extends HttpServlet {
         var uuid = request.getParameter("uuid");
         var wonPointPlayerNumber = Integer.parseInt(request.getParameter("point"));
 
-        var match = OngoingMatchesService.getOngoingMatches()
-                .get(UUID.fromString(uuid));
         var match = OngoingMatchesService.findMatch(UUID.fromString(uuid));
+
+        if (match.isEmpty()) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, "Match not found");
+            return;
+        }
 
         updateMatchScore(match.get(), wonPointPlayerNumber);
 

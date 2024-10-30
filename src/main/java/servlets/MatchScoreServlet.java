@@ -25,11 +25,11 @@ public class MatchScoreServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         var uuid = request.getParameter("uuid");
 
-        var ongoingMatches = OngoingMatchesService.getOngoingMatches();
+        var match = OngoingMatchesService.findMatch(UUID.fromString(uuid));
 
         var match = ongoingMatches.get(UUID.fromString(uuid));
 
-        configureRequestAttributes(request, match);
+        configureRequestAttributes(request, match.get());
 
         request.getRequestDispatcher("/WEB-INF/jsp/match-score.jsp")
                 .forward(request, response);
@@ -43,14 +43,15 @@ public class MatchScoreServlet extends HttpServlet {
 
         var match = OngoingMatchesService.getOngoingMatches()
                 .get(UUID.fromString(uuid));
+        var match = OngoingMatchesService.findMatch(UUID.fromString(uuid));
 
-        updateMatchScore(match, wonPointPlayerNumber);
+        updateMatchScore(match.get(), wonPointPlayerNumber);
 
-        if (isMatchWinnerDetermined(match)) {
-            processFinishedMatch(request, response, match, uuid);
+        if (isMatchWinnerDetermined(match.get())) {
+            processFinishedMatch(request, response, match.get(), uuid);
         }
 
-        configureRequestAttributes(request, match);
+        configureRequestAttributes(request, match.get());
 
         request.getRequestDispatcher("/WEB-INF/jsp/match-score.jsp")
                 .forward(request, response);

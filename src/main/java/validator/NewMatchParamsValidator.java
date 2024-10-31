@@ -32,8 +32,8 @@ public class NewMatchParamsValidator {
     }
 
     private boolean playerNamesAreEquals(RequestParameter[] parameters) {
-        var firstPlayerName = parameters[0].getValue();
-        var secondPlayerName = parameters[1].getValue();
+        var firstPlayerName = parameters[0].getValue().stripTrailing();
+        var secondPlayerName = parameters[1].getValue().stripTrailing();
 
         return firstPlayerName.equalsIgnoreCase(secondPlayerName);
     }

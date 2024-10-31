@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Match score</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/icons/page.ico">
 </head>
 <body>
 <jsp:include page="navigation-bar.jsp"/>

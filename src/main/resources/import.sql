@@ -16,3 +16,27 @@ INSERT INTO Matches(first_player_id, second_player_id, winner_id) VALUES (10, 7,
 INSERT INTO Matches(first_player_id, second_player_id, winner_id) VALUES (8, 4, 4);
 INSERT INTO Matches(first_player_id, second_player_id, winner_id) VALUES (10, 11, 11);
 INSERT INTO Matches(first_player_id, second_player_id, winner_id) VALUES (3, 5, 5);
+
+INSERT INTO Matches(first_player_id, second_player_id, winner_id) VALUES (8, 4, 4);
+INSERT INTO Matches(first_player_id, second_player_id, winner_id) VALUES (1, 11, 11);
+INSERT INTO Matches(first_player_id, second_player_id, winner_id) VALUES (3, 7, 5);
+INSERT INTO Matches(first_player_id, second_player_id, winner_id) VALUES (6, 2, 2);
+INSERT INTO Matches(first_player_id, second_player_id, winner_id) VALUES (10, 11, 11);
+INSERT INTO Matches(first_player_id, second_player_id, winner_id) VALUES (4, 5, 5);
+INSERT INTO Matches(first_player_id, second_player_id, winner_id) VALUES (1, 2, 1);
+INSERT INTO Matches(first_player_id, second_player_id, winner_id) VALUES (2, 3, 2);
+INSERT INTO Matches(first_player_id, second_player_id, winner_id) VALUES (3, 5, 5);
+INSERT INTO Matches(first_player_id, second_player_id, winner_id) VALUES (9, 4, 4);
+INSERT INTO Matches(first_player_id, second_player_id, winner_id) VALUES (10, 4, 10);
+INSERT INTO Matches(first_player_id, second_player_id, winner_id) VALUES (7, 1, 1);
+INSERT INTO Matches(first_player_id, second_player_id, winner_id) VALUES (4, 6, 6);
+INSERT INTO Matches(first_player_id, second_player_id, winner_id) VALUES (8, 9, 8);
+INSERT INTO Matches(first_player_id, second_player_id, winner_id) VALUES (2, 5, 5);
+INSERT INTO Matches(first_player_id, second_player_id, winner_id) VALUES (8, 4, 4);
+INSERT INTO Matches(first_player_id, second_player_id, winner_id) VALUES (10, 11, 10);
+INSERT INTO Matches(first_player_id, second_player_id, winner_id) VALUES (9, 7, 9);
+INSERT INTO Matches(first_player_id, second_player_id, winner_id) VALUES (8, 1, 8);
+INSERT INTO Matches(first_player_id, second_player_id, winner_id) VALUES (1, 7, 7);
+INSERT INTO Matches(first_player_id, second_player_id, winner_id) VALUES (3, 9, 9);
+INSERT INTO Matches(first_player_id, second_player_id, winner_id) VALUES (4, 1, 1);
+INSERT INTO Matches(first_player_id, second_player_id, winner_id) VALUES (2, 11, 2);

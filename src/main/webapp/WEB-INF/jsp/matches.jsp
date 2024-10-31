@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Matches</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/icons/page.ico">
 </head>
 <body>
 <jsp:include page="navigation-bar.jsp"/>
@@ -57,7 +58,7 @@
             <c:if test="${totalPages > 5}">
                 <div class="page-block">
                     <a href="?page=1<c:if test='${not empty filterPlayerName}'>${filterByPlayerName}</c:if>">
-                        <img class="page-icon" src="${pageContext.request.contextPath}/images/first-page-icon.png" alt="first page"/>
+                        <img class="page-icon" src="${pageContext.request.contextPath}/images/icons/first-page-icon.png" alt="first page"/>
                     </a>
                 </div>
             </c:if>
@@ -65,10 +66,11 @@
             <c:forEach var="index" begin="${requestScope.startPageNumber}" end="${requestScope.endPageNumber}">
 
                 <div class="page-block">
-                    <a href="?page=${index}<c:if test='${not empty filterPlayerName}'>${filterByPlayerName}</c:if>"
-                    <c:if test="${requestScope.currentPage == index}">class="currentPage"</c:if>>
-                        <img class="page-icon" src="${pageContext.request.contextPath}/images/tennis-ball-icon.png" alt=""/>
-                        <span class="overlay-page-number">${index}</span>
+                    <a href="?page=${index}<c:if test='${not empty filterPlayerName}'>${filterByPlayerName}</c:if>">
+                        <img class="page-icon" src="${pageContext.request.contextPath}/images/icons/tennis-ball-icon.png" alt=""/>
+                        <span class="overlay-page-number" <c:if test="${requestScope.currentPage == index}">id="current-page"</c:if>>
+                                ${index}
+                        </span>
                     </a>
                 </div>
 
@@ -77,7 +79,7 @@
             <c:if test="${totalPages > 5}">
                 <div class="page-block">
                     <a href="?page=${totalPages}<c:if test='${not empty filterPlayerName}'>${filterByPlayerName}</c:if>">
-                        <img class="page-icon" src="${pageContext.request.contextPath}/images/last-page-icon.png" alt="last page"/>
+                        <img class="page-icon" src="${pageContext.request.contextPath}/images/icons/last-page-icon.png" alt="last page"/>
                     </a>
                 </div>
             </c:if>

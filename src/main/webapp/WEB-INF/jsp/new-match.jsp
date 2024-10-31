@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New match</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/images/icons/page.ico">
 </head>
 <body>
 <jsp:include page="navigation-bar.jsp"/>
@@ -42,10 +43,10 @@
     </form>
 </div>
 <div class="tennis-players-block">
-    <img id="tennis-player1" class="tennis-player" src="${pageContext.request.contextPath}/images/tennis-player1.png" alt="tennis player1"/>
-    <img id="tennis-player2" class="tennis-player" src="${pageContext.request.contextPath}/images/tennis-player2.jpg" alt="tennis player2"/>
-    <img id="tennis-player3" class="tennis-player" src="${pageContext.request.contextPath}/images/tennis-player3.jpg" alt="tennis player3"/>
-    <img id="tennis-player4" class="tennis-player" src="${pageContext.request.contextPath}/images/tennis-player4.jpg" alt="tennis player4"/>
+    <img id="tennis-player1" class="tennis-player" src="${pageContext.request.contextPath}/images/tennis-players/tennis-player1.png" alt="tennis player1"/>
+    <img id="tennis-player2" class="tennis-player" src="${pageContext.request.contextPath}/images/tennis-players/tennis-player2.jpg" alt="tennis player2"/>
+    <img id="tennis-player3" class="tennis-player" src="${pageContext.request.contextPath}/images/tennis-players/tennis-player3.jpg" alt="tennis player3"/>
+    <img id="tennis-player4" class="tennis-player" src="${pageContext.request.contextPath}/images/tennis-players/tennis-player4.jpg" alt="tennis player4"/>
 </div>
 </body>
 </html>

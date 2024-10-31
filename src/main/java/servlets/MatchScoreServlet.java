@@ -123,6 +123,10 @@ public class MatchScoreServlet extends HttpServlet {
         request.setAttribute("firstPlayerScore", matchScore.getFirstPlayerScore());
         request.setAttribute("secondPlayerScore", matchScore.getSecondPlayerScore());
 
+        if (matchScore.getCalculationMethod() == CalculationMethod.ADVANTAGE) {
+            request.setAttribute("advantage", true);
+        }
+
         if (matchScore.getCalculationMethod() == CalculationMethod.TIEBREAK) {
             request.setAttribute("tiebreak", true);
         }

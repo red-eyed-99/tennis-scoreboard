@@ -17,6 +17,9 @@
         <tr>
             <th>Player</th>
             <th>Points</th>
+            <c:if test="${advantage == true}">
+                <th></th>
+            </c:if>
             <th>Games</th>
             <th>Sets</th>
             <c:if test="${tiebreak == true}">
@@ -28,6 +31,13 @@
         <tr>
             <td>${firstPlayerName}</td>
             <td>${firstPlayerScore.getPoints()}</td>
+            <c:if test="${advantage == true}">
+                <td>
+                    <c:if test="${firstPlayerScore.hasAdvantage() == true}">
+                        adv.
+                    </c:if>
+                </td>
+            </c:if>
             <td>${firstPlayerScore.getGamePoints()}</td>
             <td>${firstPlayerScore.getSetPoints()}</td>
             <c:if test="${tiebreak == true}">
@@ -37,6 +47,13 @@
         <tr>
             <td>${secondPlayerName}</td>
             <td>${secondPlayerScore.getPoints()}</td>
+            <c:if test="${advantage == true}">
+                <td>
+                    <c:if test="${secondPlayerScore.hasAdvantage() == true}">
+                        adv.
+                    </c:if>
+                </td>
+            </c:if>
             <td>${secondPlayerScore.getGamePoints()}</td>
             <td>${secondPlayerScore.getSetPoints()}</td>
             <c:if test="${tiebreak == true}">

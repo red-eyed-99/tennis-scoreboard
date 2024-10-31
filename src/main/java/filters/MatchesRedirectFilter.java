@@ -22,17 +22,17 @@ public class MatchesRedirectFilter implements Filter {
         var filterByPlayerName = request.getParameter("filter_by_player_name");
 
         if (page == null && filterByPlayerName == null) {
-            response.sendRedirect("/matches?page=1");
+            response.sendRedirect(request.getContextPath() + "/matches?page=1");
             return;
         }
 
         if (page == null) {
-            response.sendRedirect("/matches?page=1&filter_by_player_name=" + filterByPlayerName);
+            response.sendRedirect(request.getContextPath() + "/matches?page=1&filter_by_player_name=" + filterByPlayerName);
             return;
         }
 
         if (filterByPlayerName != null && filterByPlayerName.isBlank()) {
-            response.sendRedirect("/matches?page=" + page);
+            response.sendRedirect(request.getContextPath() + "/matches?page=" + page);
             return;
         }
 

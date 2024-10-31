@@ -1,5 +1,6 @@
 package servlets;
 
+import exceptions.BadRequestException;
 import exceptions.PageNotFoundException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -22,8 +23,9 @@ public class MatchesServlet extends HttpServlet {
     @SneakyThrows
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         try {
+            validatePageNumber(request.getParameter("page"));
             showMatches(request, response);
-        } catch (NumberFormatException | PageNotFoundException ex) {
+        } catch (BadRequestException | PageNotFoundException ex) {
             ResponseErrorSender.sendError(response, ex);
         }
     }
@@ -66,5 +68,17 @@ public class MatchesServlet extends HttpServlet {
         }
 
         return new FinishedMatchesService(session).findAll();
+    }
+
+    private void validatePageNumber(String page) throws BadRequestException {
+        try {
+            var pageNumber = Integer.parseInt(page);
+
+            if (pageNumber < 1) {
+                throw new BadRequestException("Invalid page number");
+            }
+        } catch (NumberFormatException ex) {
+            throw new BadRequestException("Invalid page number");
+        }
     }
 }

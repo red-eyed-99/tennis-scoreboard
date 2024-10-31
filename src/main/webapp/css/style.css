@@ -4,28 +4,6 @@
     font-family: "Chakra Petch", sans-serif;
 }
 
-@media (max-width: 540px) {
-    .tennis-players-block {
-        display: none;
-    }
-}
-
-@media (max-width: 960px) {
-    #tennis-player3 {
-        display: none;
-    }
-
-    #tennis-player4 {
-        display: none;
-    }
-}
-
-@media (max-width: 640px) {
-    .pagination-block {
-        display: contents;
-    }
-}
-
 nav {
     background-color: yellowgreen;
     padding-left: 20px;
@@ -78,54 +56,22 @@ h1 {
     border-radius: 15px;
 }
 
+/* New match */
+
+@media (max-width: 540px) {
+    .tennis-players-block {
+        display: none;
+    }
+}
+
+@media (max-width: 960px) {
+    #tennis-player3, #tennis-player4 {
+        display: none;
+    }
+}
+
 #new-match-block {
     max-width: 500px;
-}
-
-#match-score-block {
-    max-width: 1500px;
-    width: 80%;
-}
-
-#match-result-block {
-    max-width: 500px;
-}
-
-#match-result-block caption {
-    font-size: 20px;
-}
-
-#match-result-block table {
-    margin-bottom: 20px;
-}
-
-#winner-block {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
-
-#winner-cup-icon {
-    width: 60px;
-    height: 50px;
-    margin-right: 10px;
-}
-
-#winner-block span {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 35px;
-    font-weight:bold;
-    background-image: -webkit-linear-gradient(#FFF65C, #3A2C00);
-    text-shadow: -0.02em -0.03em 0.005em rgba(255, 223, 0, 0.60);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -webkit-margin-before: 0.3em;
-    -webkit-margin-after: 0.2em;
 }
 
 .form-block {
@@ -191,6 +137,13 @@ button:hover {
     margin-left: 100px;
 }
 
+/* Match score */
+
+#match-score-block {
+    max-width: 1500px;
+    width: 80%;
+}
+
 table {
     table-layout: fixed;
     width: 100%;
@@ -222,8 +175,7 @@ td {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    border-right: 2px solid yellowgreen
-
+    border-right: 2px solid yellowgreen;
 }
 
 tr:first-child td {
@@ -237,6 +189,57 @@ td:last-child {
 .win-point-button {
     padding-top: 15px;
     padding-bottom: 15px;
+}
+
+/* Match result */
+
+#match-result-block {
+    max-width: 600px;
+}
+
+#match-result-block caption {
+    font-size: 20px;
+}
+
+#match-result-block table {
+    margin-bottom: 20px;
+}
+
+#winner-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#winner-cup-icon {
+    width: 60px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+#winner-block span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 35px;
+    font-weight: bold;
+    background-image: -webkit-linear-gradient(#FFF65C, #3A2C00);
+    text-shadow: -0.02em -0.03em 0.005em rgba(255, 223, 0, 0.60);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-margin-before: 0.3em;
+    -webkit-margin-after: 0.2em;
+}
+
+/* Matches */
+
+@media (max-width: 640px) {
+    .pagination-block {
+        display: contents;
+    }
 }
 
 #matches-block {

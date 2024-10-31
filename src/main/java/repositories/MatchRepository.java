@@ -16,9 +16,10 @@ public class MatchRepository implements Repository<Match> {
     }
 
     public List<Match> findByPlayerName(String playerName) {
-        var hql = "select m from Match m where firstPlayer.name=:playerName or secondPlayer.name=:playerName";
+        var hql = "select m from Match m where firstPlayer.name ilike :playerName or secondPlayer.name ilike :playerName";
+
         return session.createQuery(hql, Match.class)
-                .setParameter("playerName", playerName)
+                .setParameter("playerName", "%" + playerName + "%")
                 .list();
     }
 

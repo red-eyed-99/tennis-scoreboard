@@ -55,6 +55,7 @@ public class MatchScoreServlet extends HttpServlet {
 
         if (isMatchWinnerDetermined(match.get())) {
             processFinishedMatch(request, response, match.get(), uuid);
+            return;
         }
 
         configureRequestAttributes(request, match.get());

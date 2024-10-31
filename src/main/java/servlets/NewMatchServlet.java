@@ -40,8 +40,6 @@ public class NewMatchServlet extends HttpServlet {
         var uuid = startNewMatch(firstPlayer, secondPlayer);
 
         String path = request.getContextPath() + "/match-score?uuid=" + uuid;
-        request.setAttribute(NewMatchAttributeNames.FIRST_PLAYER_NAME, firstPlayer);
-        request.setAttribute(NewMatchAttributeNames.SECOND_PLAYER_NAME, secondPlayer);
 
         response.sendRedirect(path);
     }
